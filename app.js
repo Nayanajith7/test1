@@ -15,9 +15,15 @@ const mongo = process.env.MONGO;
 const port = process.env.PORT || 5001;
 
 mongoose.connect(mongo)
-  .then(() => console.log("Database Connected..."))
-  .catch((err) => console.log("Fail connect DB...", err.message));
-
+  .then(() => {
+    console.log("Database Connected...");
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  })
+  .catch((err) => {
+    console.log("Fail connect DB...", err.message);
+  });
 app.listen(port, () => {
   console.log(`Server run on port ${port}`);
 });
